@@ -6,14 +6,13 @@
     --content-margin-y: 44px;
     --hero-gap: 24px;
     
-    /* 3D Wheel Configuration */
+    /* Logo Wheel Configuration */
     --wheel-logo-count: 5; /* Number of unique logos */
-    --wheel-repetitions: 5 /* How many times to repeat the logos */
-    --wheel-radius: 400px; /* Cylinder radius - smaller = tighter curve */
+    --wheel-repetitions: 3; /* How many times to repeat the logos */
     --wheel-logo-width: 80px;
     --wheel-logo-height: 40px;
-    --wheel-animation-speed: 80s; /* Animation duration */
-    --wheel-perspective: 1000px;
+    --wheel-logo-spacing: 120px; /* Space between logos */
+    --wheel-animation-speed: 30s; /* Animation duration */
     --wheel-height: 118px;
     --wheel-gradient-width: 200px;
     
@@ -246,35 +245,30 @@ body {
     max-width: 100%;
 }
 
-/* 3D Logo Wheel - Dynamic System */
+/* Logo Wheel - Horizontal Scrolling System */
 .logo-wheel-container {
     position: relative;
-    width: 100%;
+    width: 800px;
     height: var(--wheel-height);
-    perspective: var(--wheel-perspective);
     overflow: hidden;
 }
 
 .logo-wheel {
     position: relative;
-    width: 100%;
+    display: flex;
+    align-items: center;
     height: 100%;
-    transform-style: preserve-3d;
-    transform-origin: center center;
-    animation: wheelRotate var(--wheel-animation-speed) linear infinite;
+    animation: wheelScroll var(--wheel-animation-speed) linear infinite;
 }
 
 .logo-item {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    flex-shrink: 0;
     width: var(--wheel-logo-width);
     height: var(--wheel-logo-height);
-    transform-origin: center;
+    margin-right: var(--wheel-logo-spacing);
     display: flex;
     align-items: center;
     justify-content: center;
-    backface-visibility: hidden;
 }
 
 .logo-img {
@@ -285,23 +279,10 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Dynamic logo positioning - calculates angle automatically */
-/* Formula: 360deg / (logo-count * repetitions) * index */
-.logo-item:nth-child(1) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 0)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(2) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 1)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(3) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 2)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(4) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 3)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(5) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 4)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(6) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 5)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(7) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 6)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(8) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 7)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(9) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 8)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(10) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 9)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(11) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 10)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(12) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 11)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(13) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 12)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(14) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 13)) translateZ(var(--wheel-radius)); }
-.logo-item:nth-child(15) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 14)) translateZ(var(--wheel-radius)); }
+/* Remove last margin from final logo item */
+.logo-item:last-child {
+    margin-right: 0;
+}
 
 /* Wheel gradients for fade effect */
 .wheel-gradient {
@@ -329,10 +310,10 @@ body {
         var(--bg-color) 100%);
 }
 
-/* Wheel rotation animation */
-@keyframes wheelRotate {
-    0% { transform: rotateY(360deg); }
-    100% { transform: rotateY(0deg); }
+/* Wheel scrolling animation */
+@keyframes wheelScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-1 * (var(--wheel-logo-width) + var(--wheel-logo-spacing)) * var(--wheel-logo-count))); }
 }
 
 /* Description */
@@ -379,9 +360,11 @@ body {
     
     .logo-wheel-container {
         --wheel-height: 80px;
-        --wheel-perspective: 1500px;
-        margin-left: -50px;
-        margin-right: -50px;
+        --wheel-logo-width: 60px;
+        --wheel-logo-spacing: 60px;
+        width: 100%;
+        /* margin-left: -50px;
+        margin-right: -50px; */
     }
     
     .wheel-gradient-left,
@@ -414,6 +397,9 @@ body {
     
     .logo-wheel-container {
         --wheel-height: 100px;
+        --wheel-logo-width: 60px;
+        --wheel-logo-spacing: 50px;
+        width: 500px;
     }
     
     .description {
@@ -441,6 +427,9 @@ body {
     
     .logo-wheel-container {
         --wheel-height: 118px;
+        --wheel-logo-width: 60px;
+        --wheel-logo-spacing: 60px;
+        width: 700px;
     }
     
     .description {
@@ -468,6 +457,8 @@ body {
     
     .logo-wheel-container {
         --wheel-height: 140px;
+        --wheel-logo-width: 70px;
+        --wheel-logo-spacing: 80px;
     }
     
     .description {

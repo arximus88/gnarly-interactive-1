@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 3D Logo Wheel - Smart Repetition System
+    // Logo Wheel - Horizontal Scrolling System
     const logoWheel = document.querySelector('.logo-wheel');
     const logoWheelContainer = document.querySelector('.logo-wheel-container');
     
@@ -26,13 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get CSS variables for wheel configuration
         const rootStyles = getComputedStyle(document.documentElement);
         const logoCount = parseInt(rootStyles.getPropertyValue('--wheel-logo-count')) || 5;
-        const repetitions = parseInt(rootStyles.getPropertyValue('--wheel-repetitions')) || 5;
+        const repetitions = parseInt(rootStyles.getPropertyValue('--wheel-repetitions')) || 3;
         
         // Get original logos
         const originalLogos = Array.from(logoWheel.querySelectorAll('.logo-item'));
-        console.log(`Found ${originalLogos.length} unique logos, will create ${repetitions} repetitions`);
+        console.log(`Found ${originalLogos.length} unique logos, will create ${repetitions} repetitions for seamless loop`);
         
-        // Create repeated logos
+        // Create repeated logo sets for seamless animation
+        // We need enough repetitions to ensure smooth looping
         for (let rep = 1; rep < repetitions; rep++) {
             originalLogos.forEach((logo, index) => {
                 const clone = logo.cloneNode(true);
@@ -42,6 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 logoWheel.appendChild(clone);
             });
         }
+        
+        // Set the total width for seamless animation
+        const logoWidth = parseInt(rootStyles.getPropertyValue('--wheel-logo-width')) || 80;
+        const logoSpacing = parseInt(rootStyles.getPropertyValue('--wheel-logo-spacing')) || 120;
+        const totalWidth = (logoWidth + logoSpacing) * logoCount * repetitions;
+        logoWheel.style.width = `${totalWidth}px`;
         
         // Add click functionality to all logos (original + cloned)
         const allLogoItems = document.querySelectorAll('.logo-item');
@@ -59,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         console.log(`Logo wheel created: ${logoCount} unique logos × ${repetitions} repetitions = ${allLogoItems.length} total`);
+        console.log(`Total wheel width: ${totalWidth}px for seamless scrolling`);
     }
 
     // Header animations
