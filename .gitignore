@@ -40,3 +40,6 @@ logs/
 # Build outputs (if added later)
 dist/
 build/
+
+advices.md
+CLAUDE.md
