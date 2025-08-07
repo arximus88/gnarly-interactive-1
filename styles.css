@@ -1,0 +1,477 @@
+/* CSS Custom Properties for Responsive Design */
+:root {
+    /* Mobile (≤768px) */
+    --hero-font-size: 68px;
+    --content-margin-x: 12px;
+    --content-margin-y: 44px;
+    --hero-gap: 24px;
+    
+    /* 3D Wheel Configuration */
+    --wheel-logo-count: 5; /* Number of unique logos */
+    --wheel-repetitions: 5 /* How many times to repeat the logos */
+    --wheel-radius: 400px; /* Cylinder radius - smaller = tighter curve */
+    --wheel-logo-width: 80px;
+    --wheel-logo-height: 40px;
+    --wheel-animation-speed: 80s; /* Animation duration */
+    --wheel-perspective: 1000px;
+    --wheel-height: 118px;
+    --wheel-gradient-width: 200px;
+    
+    /* Colors */
+    --bg-color: #C5C4C8;
+    --text-primary: #282C38;
+    --text-secondary: #1C262F; 
+    --white: #FFFFFF;
+}
+
+/* Desktop (769px-1439px) */
+@media (min-width: 769px) {
+    :root {
+        --hero-font-size: 96px;
+        --content-margin-x: 88px;
+        --content-margin-y: 44px;
+        --hero-gap: 24px;
+    }
+}
+
+/* Large Desktop (1440px-1919px) */
+@media (min-width: 1440px) {
+    :root {
+        --hero-font-size: 128px;
+        --content-margin-x: 128px;
+        --content-margin-y: 44px;
+        --hero-gap: 24px;
+    }
+}
+
+/* Extra Large Desktop (≥1920px) */
+@media (min-width: 1920px) {
+    :root {
+        --hero-font-size: 172px;
+        --content-margin-x: 128px;
+        --content-margin-y: 88px;
+        --hero-gap: 24px;
+    }
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'PP Monument Normal';
+    src: url('fonts/PPMonumentNormal-Light.woff2') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'PP Monument Normal';
+    src: url('fonts/PPMonumentNormal-Black.woff2') format('woff2');
+    font-weight: 800;
+}
+
+body {
+    font-family: 'PP Monument Normal', Arial, sans-serif;
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    position: absolute;
+    top: var(--content-margin-y);
+    left: var(--content-margin-x);
+    right: var(--content-margin-x);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    z-index: 10;
+}
+
+.logo {
+    width: 44px;
+    height: 32px;
+}
+
+.header-logo {
+    width: 44px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.header-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--text-primary) 40%, rgba(148, 150, 156, 0) 70%, var(--white) 100%);
+}
+
+.contact-button {
+    height: 32px;
+    padding: 0 18px;
+    border: 1px solid var(--white);
+    border-radius: 16px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'PP Monument Normal', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.46;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+    background: var(--white);
+    color: var(--text-primary);
+}
+
+/* Main Content */
+.main-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Glass Media Background */
+.glass-media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 100vw;
+    height: auto;
+    aspect-ratio: 723 / 960;
+}
+
+.glass-media::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, rgba(197, 196, 200, 0) 50%, var(--bg-color) 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.glass-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.glass-video::-webkit-media-controls {
+    display: none !important;
+}
+
+.glass-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, rgba(197, 196, 200, 0) 0%, rgba(197, 196, 200, 0.8) 70%, var(--bg-color) 100%),
+        url('glass.png') center/cover;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Desktop glass gradient optimization */
+@media (min-width: 769px) {
+    .glass-image {
+        background: 
+            linear-gradient(90deg, rgba(197, 196, 200, 0) 0%, rgba(197, 196, 200, 0.6) 60%, var(--bg-color) 100%),
+            url('glass.png') center/cover;
+    }
+}
+
+/* Hero Container - Vertically Centered */
+.hero-container {
+    position: absolute;
+    top: 50%;
+    left: var(--content-margin-x);
+    right: var(--content-margin-x);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--hero-gap);
+    z-index: 5;
+}
+
+/* Hero Text */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.logotype {
+    width: 237px;
+    height: 19.43px;
+}
+
+.logotype-img {
+    width: 237px;
+    height: 19px;
+    object-fit: contain;
+}
+
+.heading {
+    color: var(--text-primary);
+    font-family: 'PP Monument Normal', Arial, sans-serif;
+    font-size: var(--hero-font-size);
+    font-weight: 800;
+    line-height: 1em;
+    text-align: left;
+    max-width: 100%;
+}
+
+/* 3D Logo Wheel - Dynamic System */
+.logo-wheel-container {
+    position: relative;
+    width: 100%;
+    height: var(--wheel-height);
+    perspective: var(--wheel-perspective);
+    overflow: hidden;
+}
+
+.logo-wheel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    animation: wheelRotate var(--wheel-animation-speed) linear infinite;
+}
+
+.logo-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--wheel-logo-width);
+    height: var(--wheel-logo-height);
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+}
+
+/* Dynamic logo positioning - calculates angle automatically */
+/* Formula: 360deg / (logo-count * repetitions) * index */
+.logo-item:nth-child(1) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 0)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(2) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 1)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(3) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 2)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(4) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 3)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(5) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 4)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(6) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 5)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(7) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 6)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(8) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 7)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(9) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 8)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(10) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 9)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(11) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 10)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(12) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 11)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(13) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 12)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(14) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 13)) translateZ(var(--wheel-radius)); }
+.logo-item:nth-child(15) { transform: translate(-50%, -50%) rotateY(calc(360deg / (var(--wheel-logo-count) * var(--wheel-repetitions)) * 14)) translateZ(var(--wheel-radius)); }
+
+/* Wheel gradients for fade effect */
+.wheel-gradient {
+    position: absolute;
+    top: 0;
+    width: var(--wheel-gradient-width);
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.wheel-gradient-left {
+    left: 0;
+    background: linear-gradient(90deg, 
+        var(--bg-color) 0%, 
+        rgba(197, 196, 200, 0.8) 30%,
+        rgba(197, 196, 200, 0) 100%);
+}
+
+.wheel-gradient-right {
+    right: 0;
+    background: linear-gradient(90deg, 
+        rgba(197, 196, 200, 0) 0%,
+        rgba(197, 196, 200, 0.8) 70%,
+        var(--bg-color) 100%);
+}
+
+/* Wheel rotation animation */
+@keyframes wheelRotate {
+    0% { transform: rotateY(360deg); }
+    100% { transform: rotateY(0deg); }
+}
+
+/* Description */
+.description {
+    position: absolute;
+    bottom: var(--content-margin-y);
+    left: var(--content-margin-x);
+    right: var(--content-margin-x);
+    max-width: 682px;
+    min-height: 40px;
+    color: var(--text-secondary);
+    font-family: 'PP Monument Normal', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.46;
+    text-align: left;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .header {
+        gap: 16px;
+    }
+    
+    .header-logo {
+        width: 32px;
+        height: 24px;
+    }
+    
+    .contact-button {
+        height: 28px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+    
+    .logotype-img {
+        width: 180px;
+        height: auto;
+    }
+    
+    .heading {
+        max-width: 320px;
+    }
+    
+    .logo-wheel-container {
+        --wheel-height: 80px;
+        --wheel-perspective: 1500px;
+        margin-left: -50px;
+        margin-right: -50px;
+    }
+    
+    .wheel-gradient-left,
+    .wheel-gradient-right {
+        --wheel-gradient-width: 100px;
+    }
+    
+    .description {
+        max-width: 400px;
+        font-size: 12px;
+    }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 769px) and (max-width: 1439px) {
+    .glass-media {
+        width: auto;
+        height: min(100vh, 800px);
+        aspect-ratio: 723 / 960;
+    }
+    
+    .header {
+        gap: 24px;
+    }
+    
+    .logotype-img {
+        width: 200px;
+        height: 16px;
+    }
+    
+    .logo-wheel-container {
+        --wheel-height: 100px;
+    }
+    
+    .description {
+        max-width: 500px;
+        font-size: 13px;
+    }
+}
+
+/* Large Desktop Adjustments */
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .glass-media {
+        width: auto;
+        height: min(100vh, 1080px);
+        aspect-ratio: 723 / 960;
+    }
+    
+    .header {
+        gap: 32px;
+    }
+    
+    .logotype-img {
+        width: 237px;
+        height: 19px;
+    }
+    
+    .logo-wheel-container {
+        --wheel-height: 118px;
+    }
+    
+    .description {
+        max-width: 682px;
+        font-size: 14px;
+    }
+}
+
+/* Extra Large Desktop Adjustments */
+@media (min-width: 1920px) {
+    .glass-media {
+        width: auto;
+        height: min(100vh, 1200px);
+        aspect-ratio: 723 / 960;
+    }
+    
+    .header {
+        gap: 40px;
+    }
+    
+    .logotype-img {
+        width: 280px;
+        height: 23px;
+    }
+    
+    .logo-wheel-container {
+        --wheel-height: 140px;
+    }
+    
+    .description {
+        max-width: 750px;
+        font-size: 16px;
+    }
+}

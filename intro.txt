@@ -1,0 +1,19 @@
+Client give me a task>>>
+Okay, I have one small task for you, not super major but a good starting point. I need a single pager. I started but needs improvements :)
+I want to improve this but still keep it very basic.
+It’s just a basic agency styled portfolio single pager
+Indidnt want to use any images
+And there is no logo or official branding yet
+---
+okay, you are doing agency website for yourself just to land potential clients somewhere. The only CTA block is Contact us. No set branding yet. Simple layout, no complex imagenery, include blocks:
+- Name
+- Description
+- Brands
+- Contacs.
+---
+More so to show some of the brands I’ve made so when I reach out to investors they can visit my site and see things I’ve done
+
+
+----
+
+There are few shity pages he shared with me. I need to create something better and yet simple. So I need an analyze + investigation, how to create what he want, I need most effective and eyepicking examples. And few options of full page copy + descriptions of styling and interactive things.

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gnarly Brands - Prototype the Future</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Gnarly" class="header-logo">
+            </div>
+            <div class="header-line"></div>
+            <button class="contact-button">GET IN CONTACT</button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Glass Video Background -->
+            <div class="glass-media">
+                <video class="glass-video" autoplay muted loop playsinline>
+                    <source src="glass.mp4" type="video/mp4">
+                </video>
+                <div class="glass-image"></div>
+            </div>
+
+            <!-- Hero Container - Vertically Centered -->
+            <div class="hero-container">
+                <div class="hero-text">
+                    <div class="logotype">
+                        <img src="logotype.svg" alt="Gnarly Brands" class="logotype-img">
+                    </div>
+                    <h1 class="heading">prototype
+                    </br>
+                    the future</h1>
+                </div>
+
+                <!-- 3D Logo Wheel -->
+                <div class="logo-wheel-container">
+                    <div class="logo-wheel" id="logoWheel">
+                        <!-- Only unique logos - CSS handles repetition -->
+                        <div class="logo-item" data-logo="ballgame">
+                            <img src="logo-ballgame.png" alt="Ballgame" class="logo-img">
+                        </div>
+                        <div class="logo-item" data-logo="zed">
+                            <img src="logo-zed.png" alt="Zed" class="logo-img">
+                        </div>
+                        <div class="logo-item" data-logo="prize">
+                            <img src="logo-prize.png" alt="Prize" class="logo-img">
+                        </div>
+                        <div class="logo-item" data-logo="no-one">
+                            <img src="logo-no-one.png" alt="No One" class="logo-img">
+                        </div>
+                        <div class="logo-item" data-logo="drinky">
+                            <img src="logo-drinky.png" alt="Drinky" class="logo-img">
+                        </div>
+                    </div>
+                    <div class="wheel-gradient wheel-gradient-left"></div>
+                    <div class="wheel-gradient wheel-gradient-right"></div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <p class="description">
+                An independent incubator turning cultural whitespace into products people actually want. We research, design, and launch proof-of-concept brands with speed and precision.
+            </p>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
